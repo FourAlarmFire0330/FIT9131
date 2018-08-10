@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.params=
+comment0.target=Sale()
+comment0.text=\r\n\ Constructor\ for\ objects\ of\ class\ Sale\r\n
+comment1.params=prodList
+comment1.target=void\ setProdList(ProductList)
+comment2.params=
+comment2.target=ProductList\ getProdList()
+comment3.params=transaction
+comment3.target=void\ setTransaction(SaleTransaction)
+comment4.params=
+comment4.target=SaleTransaction\ getSaleTransaction()
+numComments=5

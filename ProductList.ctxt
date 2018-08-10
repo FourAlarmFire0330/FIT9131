@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.params=
+comment0.target=ProductList()
+comment0.text=\r\n\ Constructor\ for\ objects\ of\ class\ ProductList\r\n
+comment1.params=listOfProducts
+comment1.target=void\ setListOfProducts(Product[])
+comment2.params=
+comment2.target=Product[]\ getListOfProducts()
+numComments=3
