@@ -37,4 +37,11 @@ public class RandomNumberGenerator
     {
         return maximumValue;
     }
+    
+    //Generate the randomNumber within a range
+    public int generateNumber(int minimumValue, int maximumValue)
+    {        
+        int randomNumber = minimumValue + (int)(Math.random() * (maximumValue - minimumValue));
+        return randomNumber;
+    } 
 }
