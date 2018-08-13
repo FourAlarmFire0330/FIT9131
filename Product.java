@@ -10,9 +10,9 @@ public class Product
     // fields
     private String name;
     private String desc;
-    private double price;
+    private String price;
     private int qtyOnHand;
-    private int minOrderQty;
+    private String minOrderQty;
 
     /**
      * Constructor for objects of class Product
@@ -21,9 +21,9 @@ public class Product
     {
         name = "";
         desc = "";
-        price = 0;
+        price = "";
         qtyOnHand = 0;
-        minOrderQty = 0;
+        minOrderQty = "";
     }
     
     public void setName(String name)
@@ -44,11 +44,11 @@ public class Product
         return desc;
     }
     
-    public void setPrice(double price)
+    public void setPrice(String price)
     {  
         this.price = price;    
     }
-    public double getPrice()
+    public String getPrice()
     {
         return price;
     }
@@ -62,11 +62,11 @@ public class Product
         return qtyOnHand;
     }
     
-    public void setMinOrderQty(int minOrderQty)
+    public void setMinOrderQty(String minOrderQty)
     {  
         this.minOrderQty = minOrderQty;    
     }
-    public int getMinOrderQty()
+    public String getMinOrderQty()
     {
         return minOrderQty;
     }

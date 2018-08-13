@@ -36,32 +36,40 @@ public class ProductList
         Scanner console = new Scanner(System.in);
         String name = "";
         String desc = "";
-        double price = 0;
+        String price = "";
         int qtyOnHand = 0;
-        int minOrderQty = 0;
-        System.out.println("Please enter the name of the product: ");
-        do {
-            name = console.nextLine();
-        }while (!checkProName(name));
-        System.out.println("Please enter the description of the product: ");
-        do {
-            desc = console.nextLine();
-        }while (!checkProDesc(desc));
-        System.out.println("Please enter the unit price for a single item of the product: ");
-        do {
-           price = console.nextDouble();
-        }while (!checkProPrice(price));
-        qtyOnHand = randomNumber.generateNumber(0,10);
-        System.out.println("Please enter the minimum quantity to be ordered: ");
-        minOrderQty = console.nextInt();
-        //Generate the new Product
-        newProduct.setName(name);
-        newProduct.setDesc(desc);
-        newProduct.setPrice(price);
-        newProduct.setQtyOnHand(qtyOnHand);
-        newProduct.setMinOrderQty(minOrderQty);
-        //Add this product to the list
-        listOfProducts[proPosition] = newProduct;
+        String minOrderQty = "";
+        if (proPosition > 4)
+        {
+            System.out.println("The System only allows a maximum of 5 products which can be registered! ");
+        }
+        else
+        {
+            System.out.println("Please enter the name of the product: ");
+            do {
+                name = console.nextLine();
+            }while (!checkProName(name));
+            System.out.println("Please enter the description of the product: ");
+            do {
+                desc = console.nextLine();
+            }while (!checkProDesc(desc));
+            System.out.println("Please enter the unit price for a single item of the product: ");
+            do {
+               price = console.nextLine();
+            }while (!checkProPrice(price));
+            qtyOnHand = randomNumber.generateNumber(0,10);
+            System.out.println("Please enter the minimum quantity to be ordered: ");
+            minOrderQty = console.nextLine();
+            //Generate the new Product
+            newProduct.setName(name);
+            newProduct.setDesc(desc);
+            newProduct.setPrice(price);
+            newProduct.setQtyOnHand(qtyOnHand);
+            newProduct.setMinOrderQty(minOrderQty);
+            //Add this product to the list
+            listOfProducts[proPosition] = newProduct;
+            System.out.println("Successfully add the product!");
+        }
     }
     
     //Check the product name
@@ -74,6 +82,11 @@ public class ProductList
         }
         for (Product p : listOfProducts)
         {
+            if (p == null)
+            {
+                return true;
+            }
+            
             if ((name.toLowerCase()).equals(p.getName().toLowerCase()))
             {
                 System.out.println("Name cannot be repeated for two or more products!");
@@ -98,9 +111,9 @@ public class ProductList
     }
     
     //Check the product price
-    public boolean checkProPrice(double price)
+    public boolean checkProPrice(String price)
     {
-        if (price < 0)
+        if (Double.parseDouble(price) <= 0)
         {
             System.out.println("Price must be over 0!");
             return false;
@@ -109,5 +122,28 @@ public class ProductList
         {
             return true;
         }        
+    }
+    
+    //View all Available Products
+    public void viewAllPro()
+    {
+        System.out.println("These are all available Products: ");
+        
+        for (Product p : listOfProducts)
+        {
+            if (p == null)
+            {
+                break;
+            }
+            else
+            {
+                System.out.println("Name: " + p.getName());
+                System.out.println("  Description: " + p.getDesc());
+                System.out.println("  Quantity: " + p.getQtyOnHand());
+                System.out.println("  Price: " + p.getPrice());
+                System.out.println("  Min Order Quantity: " + p.getMinOrderQty());
+                System.out.println();
+            }
+        }
     }
 }

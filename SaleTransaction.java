@@ -18,7 +18,7 @@ public class SaleTransaction
     public SaleTransaction()
     {
         saleCode = 0;
-        items = new Product[100];
+        items = new Product[3];
         totalCost = 0;
     }
     
@@ -47,5 +47,33 @@ public class SaleTransaction
     public double getTotalCost()
     {
         return totalCost;
+    }
+    
+    //Add the selected item to the cart
+    public boolean AddProToCart(int cartNumber, int selectedPro)
+    {
+        ProductList proListObject = new ProductList();
+        Product[] proList = new Product[5];
+        proList = proListObject.getListOfProducts();
+        
+        if (proList[selectedPro].getQtyOnHand() < Integer.parseInt(proList[selectedPro].getMinOrderQty()))
+        {
+            System.out.println("There are not enough quantity to buy! Sorry about that~");
+            return false;
+        }
+        else
+        {
+            items[cartNumber] = proList[selectedPro];
+            System.out.println("Successfully added to the cart!");
+            return true;
+        }
+    }
+    
+    //Remove items from the cart
+    public boolean RemoveProFromCart(int cartNumber)
+    {
+        items[cartNumber] = null;
+        System.out.println("Successfully removed from the cart!");
+        return true;
     }
 }
