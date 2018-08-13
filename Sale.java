@@ -64,8 +64,10 @@ public class Sale
     {
         boolean keepRunning = true; 
         Scanner console = new Scanner(System.in);
+        Product[] pro = new Product[5];
         String choice = "";
-        int times = 0;
+        int addProTimes = 0;
+        int addToCartTimes = 0;
         
         while (keepRunning)
         {
@@ -74,12 +76,17 @@ public class Sale
             switch (choice)
             {
                 case "1":
-                    prodList.addNewProToList(times);
-                    times++;
+                    pro = prodList.addNewProToList(addProTimes);
+                    addProTimes++;
                     break;
                 case "2":
-                    System.out.println("2");
-                    break;
+                    if (transaction.AddProToCart(addToCartTimes, pro))
+					{
+                    	addToCartTimes++;
+						break;
+					}
+					else
+                    	break;
                 case "3":
                     System.out.println("3");
                     break;

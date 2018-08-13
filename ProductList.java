@@ -29,7 +29,7 @@ public class ProductList
     }
     
     //Add a new product to the list
-    public void addNewProToList(int proPosition)
+    public Product[] addNewProToList(int proPosition)
     {
         Product newProduct = new Product();
         RandomNumberGenerator randomNumber = new RandomNumberGenerator();
@@ -70,6 +70,7 @@ public class ProductList
             listOfProducts[proPosition] = newProduct;
             System.out.println("Successfully add the product!");
         }
+        return listOfProducts;
     }
     
     //Check the product name

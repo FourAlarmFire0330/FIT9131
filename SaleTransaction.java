@@ -5,6 +5,7 @@
  * @author (your name) 
  * @version (a version number or a date)
  */
+import java.util.Scanner;
 public class SaleTransaction
 {
     // fields
@@ -50,22 +51,89 @@ public class SaleTransaction
     }
     
     //Add the selected item to the cart
-    public boolean AddProToCart(int cartNumber, int selectedPro)
+    public boolean AddProToCart(int cartNumber, Product[] pro)
     {
-        ProductList proListObject = new ProductList();
-        Product[] proList = new Product[5];
-        proList = proListObject.getListOfProducts();
-        
-        if (proList[selectedPro].getQtyOnHand() < Integer.parseInt(proList[selectedPro].getMinOrderQty()))
+        if (items[2] != null)
         {
-            System.out.println("There are not enough quantity to buy! Sorry about that~");
+            System.out.println("Sorry, a user can purchase a maximum of THREE items only! ");
             return false;
         }
-        else
+        if (pro[0] == null)
         {
-            items[cartNumber] = proList[selectedPro];
-            System.out.println("Successfully added to the cart!");
-            return true;
+            System.out.println("There is no products on sale! ");
+            return false;
+        }
+        Scanner console = new Scanner(System.in);
+        String options = "";
+        boolean keepBuying = true;
+        int i = 1;
+        System.out.println("Please select from the following products which are available: ");
+        for (Product p : pro)
+        {
+            if (p == null)
+            {
+                break;
+            }
+            else
+            {
+                System.out.println("Select Product " + i);
+                System.out.println("Name: " + p.getName());
+                System.out.println("  Description: " + p.getDesc());
+                System.out.println("  Quantity: " + p.getQtyOnHand());
+                System.out.println("  Price: " + p.getPrice());
+                System.out.println("  Min Order Quantity: " + p.getMinOrderQty());
+                System.out.println();
+                i++;
+            }
+        }
+        while(keepBuying)
+        {
+            System.out.println("Please enter selected Product: (q for quit purchasing) ");
+            options = console.nextLine();
+            if (!(options.equals("q")))
+            {
+                if (pro[Integer.parseInt(options) - 1] == null)
+                {
+                    System.out.println("Only products added can be purchased! ");
+                }
+                else if (pro[Integer.parseInt(options) - 1].getQtyOnHand() 
+                         < Integer.parseInt(pro[Integer.parseInt(options) - 1].getMinOrderQty()))
+                {
+                    System.out.println("Not enough quantity! ");
+                }
+                else
+                {
+                    items[cartNumber] = pro[Integer.parseInt(options) - 1];
+                    System.out.println("Successfully added to the Cart! ");
+                    return true;
+                }
+            }
+            else
+            {
+                keepBuying = false;
+            }
+        }
+		return keepBuying;
+    }
+    
+    //view the Cart
+    public void viewProFromCart()
+    {
+        System.out.println("These are the products from your Cart: ");
+        for (Product p : items)
+        {
+            if (p == null)
+            {
+                break;
+            }
+            else
+            {
+                System.out.println("Name: " + p.getName());
+                System.out.println("  Description: " + p.getDesc());
+                System.out.println("  Quantity: " + p.getQtyOnHand());
+                System.out.println("  Price: " + p.getPrice());
+                System.out.println();                
+            }
         }
     }
     
