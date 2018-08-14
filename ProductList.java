@@ -134,7 +134,7 @@ public class ProductList
         {
             if (p == null)
             {
-                break;
+                System.out.println();
             }
             else
             {

@@ -88,13 +88,13 @@ public class Sale
 					else
                     	break;
                 case "3":
-                    System.out.println("3");
+                    transaction.RemoveProFromCart();
                     break;
                 case "4":
                     prodList.viewAllPro();
                     break;
                 case "5":
-                    System.out.println("5");
+                    transaction.checkOut();
                     break;
                 case "6":
                     System.out.println("6");
@@ -108,5 +108,9 @@ public class Sale
             }
         }
     }
-    
+    //Allows the user to view a brief but descriptive expanation on how to use the system
+    public void getHelp()
+    {
+        
+    }
 }
