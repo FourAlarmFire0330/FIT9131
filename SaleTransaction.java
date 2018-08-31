@@ -2,7 +2,7 @@
 /**
  * Write a description of class SaleTransaction here.
  * 
- * @author (your name) 
+ * @Tianyang Zhang-28484452 
  * @version (a version number or a date)
  */
 import java.util.Scanner;
@@ -51,7 +51,7 @@ public class SaleTransaction
     }
     
     //Add the selected item to the cart
-    public boolean AddProToCart(int cartNumber, Product[] pro)
+    public boolean addProToCart(Product[] pro)
     {
         if (items[0] != null && items[1] != null && items[2] != null)
         {
@@ -86,6 +86,7 @@ public class SaleTransaction
                 i++;
             }
         }
+        //Adding the selected product to Cart
         while(keepBuying)
         {
             System.out.println("Please enter selected Product: (q for quit purchasing) ");
@@ -97,15 +98,21 @@ public class SaleTransaction
                     System.out.println("Only products added can be purchased! ");
                 }
                 else if (pro[Integer.parseInt(options) - 1].getQtyOnHand() 
-                         < Integer.parseInt(pro[Integer.parseInt(options) - 1].getMinOrderQty()))
+                         < pro[Integer.parseInt(options) - 1].getMinOrderQty())
                 {
                     System.out.println("Not enough quantity! ");
                 }
                 else
                 {
-                    items[cartNumber] = pro[Integer.parseInt(options) - 1];
-                    System.out.println("Successfully added to the Cart! ");
-                    return true;
+                    for (int j = 0; j < 3; j++)
+                    {
+                        if (items[j] == null)
+                        {
+                            items[j] = pro[Integer.parseInt(options) - 1];
+                            System.out.println("Successfully added to the Cart! ");
+                            return true;                            
+                        }
+                    }
                 }
             }
             else
@@ -116,28 +123,68 @@ public class SaleTransaction
         return keepBuying;
     }
     
-    //view the Cart
-    public void viewProFromCart()
+    //Check out your purchase
+    public void checkOut()
     {
-        int i = 1;
-        System.out.println("These are the products from your Cart: ");
-        for (Product p : items)
+        if (items[0] == null && items[1] == null && items[2] == null)
         {
-            if (p == null)
-                System.out.println();
+            System.out.println("There is no items in the Cart! ");
+        }
+        else
+        {
+            Scanner console = new Scanner(System.in);
+            String goOnOption = "";
+            System.out.println("These are the products from your Cart: ");
+            for (Product p : items)
+            {
+                if (p == null)
+                    System.out.println();
+                else
+                {
+                    System.out.println("Name: " + p.getName());
+                    System.out.println("  Description: " + p.getDesc());
+                    System.out.println("  Quantity: " + p.getMinOrderQty());
+                    System.out.println("  Price: " + p.getPrice());
+                    System.out.println();
+                }
+            }
+            System.out.println("Are you sure you want to check out? (Y/N)");
+            goOnOption = console.nextLine();
+            if (goOnOption.equals("Y") || goOnOption.equals("y"))
+            {
+                for (Product p : items)
+                {
+                    if (p == null)
+                    {
+                    }
+                    else
+                    {
+                        double costForOneItem = p.getMinOrderQty() * Double.parseDouble(p.getPrice());
+                        int leftQuantity = p.getQtyOnHand() - p.getMinOrderQty();
+                        p.setQtyOnHand(leftQuantity);
+                        totalCost = totalCost + costForOneItem;
+                        setTotalCost(totalCost);
+                    }
+                }
+                System.out.println("The totalCost for your purchase is: " + getTotalCost());
+                for (int i = 0; i < 3; i++)
+                {
+                    items[i] = null;
+                }
+                setTotalCost(0);
+                System.out.println("Successfuly check out! See u next time~");                
+            }
+            else if (goOnOption.equals("N") || goOnOption.equals("n"))
+            {
+                System.out.println("Successfully cancelled! ");
+            }
             else
             {
-                System.out.println("Added Item " + i);
-                System.out.println("Name: " + p.getName());
-                System.out.println("  Description: " + p.getDesc());
-                System.out.println("  Quantity: " + p.getQtyOnHand());
-                System.out.println("  Price: " + p.getPrice());
-                System.out.println();
-                i++;
+                System.out.println("Wrong Input! ");
             }
         }
     }
-    
+
     //Remove items from the cart
     public void RemoveProFromCart()
     {
@@ -189,65 +236,25 @@ public class SaleTransaction
         }
     }
     
-    //Check out your purchase
-    public void checkOut()
+    //view the Cart
+    public void viewProFromCart()
     {
-        if (items[0] == null && items[1] == null && items[2] == null)
+        int i = 1;
+        System.out.println("These are the products from your Cart: ");
+        for (Product p : items)
         {
-            System.out.println("There is no items in the Cart! ");
-        }
-        else
-        {
-            Scanner console = new Scanner(System.in);
-            String goOnOption = "";
-            System.out.println("These are the products from your Cart: ");
-            for (Product p : items)
-            {
-                if (p == null)
-                    System.out.println();
-                else
-                {
-                    System.out.println("Name: " + p.getName());
-                    System.out.println("  Description: " + p.getDesc());
-                    System.out.println("  Quantity: " + p.getMinOrderQty());
-                    System.out.println("  Price: " + p.getPrice());
-                    System.out.println();
-                }
-            }
-            System.out.println("Are you sure you want to check out? (Y/N)");
-            goOnOption = console.nextLine();
-            if (goOnOption.equals("Y") || goOnOption.equals("y"))
-            {
-                for (Product p : items)
-                {
-                    if (p == null)
-                    {
-                    }
-                    else
-                    {
-                        double costForOneItem = Integer.parseInt(p.getMinOrderQty()) * Double.parseDouble(p.getPrice());
-                        int leftQuantity = p.getQtyOnHand() - Integer.parseInt(p.getMinOrderQty());
-                        p.setQtyOnHand(leftQuantity);
-                        totalCost = totalCost + costForOneItem;
-                        setTotalCost(totalCost);
-                    }
-                }
-                System.out.println("The totalCost for your purchase is: " + getTotalCost());
-                for (int i = 0; i < 3; i++)
-                {
-                    items[i] = null;
-                }
-                setTotalCost(0);
-                System.out.println("Successfuly check out! See u next time~");                
-            }
-            else if (goOnOption.equals("N") || goOnOption.equals("n"))
-            {
-                System.out.println("Successfully cancelled! ");
-            }
+            if (p == null)
+                System.out.println();
             else
             {
-                System.out.println("Wrong Input! ");
+                System.out.println("Added Item " + i);
+                System.out.println("Name: " + p.getName());
+                System.out.println("  Description: " + p.getDesc());
+                System.out.println("  Quantity: " + p.getQtyOnHand());
+                System.out.println("  Price: " + p.getPrice());
+                System.out.println();
+                i++;
             }
         }
-    }
+    }    
 }

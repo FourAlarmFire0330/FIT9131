@@ -2,7 +2,7 @@
 /**
  * Write a description of class Product here.
  * 
- * @author (your name) 
+ * @Tianyang Zhang - 28484452
  * @version (a version number or a date)
  */
 public class Product
@@ -12,7 +12,7 @@ public class Product
     private String desc;
     private String price;
     private int qtyOnHand;
-    private String minOrderQty;
+    private int minOrderQty;
 
     /**
      * Constructor for objects of class Product
@@ -23,7 +23,7 @@ public class Product
         desc = "";
         price = "";
         qtyOnHand = 0;
-        minOrderQty = "";
+        minOrderQty = 0;
     }
     
     public void setName(String name)
@@ -62,14 +62,12 @@ public class Product
         return qtyOnHand;
     }
     
-    public void setMinOrderQty(String minOrderQty)
+    public void setMinOrderQty(int minOrderQty)
     {  
         this.minOrderQty = minOrderQty;    
     }
-    public String getMinOrderQty()
+    public int getMinOrderQty()
     {
         return minOrderQty;
-    }
-    
-    
+    }        
 }

@@ -2,7 +2,7 @@
 /**
  * Write a description of class Sale here.
  * 
- * @author (your name) 
+ * @Tianyang Zhang - 284844
  * @version (a version number or a date)
  */
 import java.util.Scanner;
@@ -21,6 +21,7 @@ public class Sale
         transaction = new SaleTransaction();
     }
     
+    // pairs of accessor and mutator method.
     public void setProdList(ProductList prodList)
     {
         this.prodList = prodList;
@@ -39,6 +40,69 @@ public class Sale
         return transaction;
     }
     
+    //The entrance to the program
+    public void entrance()
+    {
+        boolean keepRunning = true; 
+        Scanner console = new Scanner(System.in);
+        Product[] pro = new Product[5];
+        String choice = "";
+        int addProTimes = 0;
+        
+        while (keepRunning)
+        {
+            Menu();
+            choice = console.nextLine();
+            switch (choice)
+            {
+                case "1":
+                    pro = prodList.addNewProToList(addProTimes);
+                    addProTimes++;
+                    break;
+                case "2":
+                    if (transaction.addProToCart(pro))
+					{
+						break;
+					}
+					else
+                    	break;
+                case "3":
+                    transaction.RemoveProFromCart();
+                    break;
+                case "4":
+                    prodList.viewAllPro();
+                    break;
+                case "5":
+                    transaction.checkOut();
+                    break;
+                case "6":
+                    getHelp();
+                    break;
+                case "7":
+                    System.out.println("System closed!");
+                    System.exit(0);
+                default:
+                    System.out.println("There is no such a option! Please enter again~");
+                    break;
+            }
+        }
+    }
+    //Allows the user to view a brief but descriptive expanation on how to use the system
+    public void getHelp()
+    {
+        System.out.println();
+        System.out.println("=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=");
+        System.out.println("+  Option1: Allow the user to register a new product to be sold                 +");
+        System.out.println("=  Option2: Allow the user to purchase a new product which has been registered  =");
+        System.out.println("+  Option3: Allow the user to remove a product which has been purchased in Cart +");
+        System.out.println("=  Option4: Allow the user to view all the currently registered products        =");
+        System.out.println("+  Option5: Allow the user to finalize a sale and checkout from the system      +");
+        System.out.println("=  Option6: How to use this system                                              =");
+        System.out.println("+  Option7: Exit the system                                                     +");      
+        System.out.println("=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=");
+        System.out.println();
+    }
+        
     //Display the menu
     public static void Menu()
     {
@@ -56,61 +120,5 @@ public class Sale
         System.out.println("Press 7 to Exit");
         System.out.println();
         System.out.println("Please Enter your Choice: ");
-    }
-    
-    
-    //The entrance to the program
-    public void entrance()
-    {
-        boolean keepRunning = true; 
-        Scanner console = new Scanner(System.in);
-        Product[] pro = new Product[5];
-        String choice = "";
-        int addProTimes = 0;
-        int addToCartTimes = 0;
-        
-        while (keepRunning)
-        {
-            Menu();
-            choice = console.nextLine();
-            switch (choice)
-            {
-                case "1":
-                    pro = prodList.addNewProToList(addProTimes);
-                    addProTimes++;
-                    break;
-                case "2":
-                    if (transaction.AddProToCart(addToCartTimes, pro))
-					{
-                    	addToCartTimes++;
-						break;
-					}
-					else
-                    	break;
-                case "3":
-                    transaction.RemoveProFromCart();
-                    break;
-                case "4":
-                    prodList.viewAllPro();
-                    break;
-                case "5":
-                    transaction.checkOut();
-                    break;
-                case "6":
-                    System.out.println("6");
-                    break;
-                case "7":
-                    System.out.println("System closed!");
-                    System.exit(0);
-                default:
-                    System.out.println("There is no such a option! Please enter again~");
-                    break;
-            }
-        }
-    }
-    //Allows the user to view a brief but descriptive expanation on how to use the system
-    public void getHelp()
-    {
-        
-    }
+    }    
 }

@@ -2,7 +2,7 @@
 /**
  * Write a description of class ProductList here.
  * 
- * @author (your name) 
+ * @Tianyang Zhang - 28484452
  * @version (a version number or a date)
  */
 import java.util.Scanner;
@@ -38,7 +38,7 @@ public class ProductList
         String desc = "";
         String price = "";
         int qtyOnHand = 0;
-        String minOrderQty = "";
+        int minOrderQty = 0;
         if (proPosition > 4)
         {
             System.out.println("The System only allows a maximum of 5 products which can be registered! ");
@@ -58,8 +58,7 @@ public class ProductList
                price = console.nextLine();
             }while (!checkProPrice(price));
             qtyOnHand = randomNumber.generateNumber(0,10);
-            System.out.println("Please enter the minimum quantity to be ordered: ");
-            minOrderQty = console.nextLine();
+            minOrderQty = randomNumber.generateNumber(1,5);
             //Generate the new Product
             newProduct.setName(name);
             newProduct.setDesc(desc);
@@ -72,6 +71,20 @@ public class ProductList
         }
         return listOfProducts;
     }
+
+    //Check the product description
+    public boolean checkProDesc(String desc)
+    {
+        if (desc.length() < 1 || desc.length() > 50)
+        {
+            System.out.println("Description must be between 1 and 50 characters long!");
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }    
     
     //Check the product name
     public boolean checkProName(String name)
@@ -97,26 +110,12 @@ public class ProductList
         return true;
     }
     
-    //Check the product description
-    public boolean checkProDesc(String desc)
-    {
-        if (desc.length() < 1 || desc.length() > 50)
-        {
-            System.out.println("Description must be between 1 and 50 characters long!");
-            return false;
-        }
-        else
-        {
-            return true;
-        }
-    }
-    
     //Check the product price
     public boolean checkProPrice(String price)
     {
         if (Double.parseDouble(price) <= 0)
         {
-            System.out.println("Price must be over 0!");
+            System.out.println("Price must over 0!");
             return false;
         }
         else

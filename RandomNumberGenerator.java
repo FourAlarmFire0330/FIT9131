@@ -2,7 +2,7 @@
 /**
  * Write a description of class RandomNumberGenerator here.
  * 
- * @author (your name) 
+ * @Tianyang Zhang - 28484452 
  * @version (a version number or a date)
  */
 public class RandomNumberGenerator
